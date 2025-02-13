@@ -22,10 +22,10 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 bat '''
-                docker stop ${CONTAINER_NAME} || true
-                docker rm ${CONTAINER_NAME} || true
-                docker run -d -p 5000:5000 --name ${CONTAINER_NAME} ${IMAGE_NAME}
-                '''
+        docker stop %CONTAINER_NAME% || echo Container not running
+        docker rm %CONTAINER_NAME% || echo Container does not exist
+        docker run -d -p 5000:5000 --name %CONTAINER_NAME% %IMAGE_NAME%
+        '''
             }
         }
     }

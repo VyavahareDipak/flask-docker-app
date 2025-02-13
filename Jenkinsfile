@@ -15,16 +15,16 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t $IMAGE_NAME .'
+                bat 'docker build -t ${IMAGE_NAME} .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
                 bat '''
-                docker stop $CONTAINER_NAME || true
-                docker rm $CONTAINER_NAME || true
-                docker run -d -p 5000:5000 --name $CONTAINER_NAME $IMAGE_NAME
+                docker stop ${CONTAINER_NAME} || true
+                docker rm ${CONTAINER_NAME} || true
+                docker run -d -p 5000:5000 --name ${CONTAINER_NAME} ${IMAGE_NAME}
                 '''
             }
         }
